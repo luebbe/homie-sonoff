@@ -1,5 +1,5 @@
 #define FW_NAME "sonoff"
-#define FW_VERSION "1.0.2"
+#define FW_VERSION "1.0.3"
 
 #include <Homie.h>
 #include "homie-node-collection.h"
@@ -11,6 +11,9 @@ const int PIN_BUTTON = 0;
 const int PIN_RELAY = 12;
 const int PIN_LED = 13;
 
+// Setup OTA logging via Homie logger
+OtaLogger ota;
+
 RelayNode relayNode("relay", PIN_RELAY, PIN_LED);
 
 // Initialize button node with callback to button press
@@ -18,12 +21,20 @@ ButtonNode buttonNode("button", PIN_BUTTON, []() {
   relayNode.toggleRelay();
 });
 
+void setupHandler() {
+  // This is called after the MQTT_CONNECTED event
+  ota.setup();
+}
+
+void loopHandler() {
+  ota.loop();
+}
+
 void setup() {
   Serial.begin(SERIAL_SPEED);
   Serial << endl << endl;
 
   welcome();
-  otaSetup();
 
   pinMode(PIN_BUTTON, INPUT_PULLUP);
 
@@ -31,10 +42,13 @@ void setup() {
 
   Homie.disableResetTrigger();
   Homie.disableLedFeedback();
+
+  Homie.setSetupFunction(setupHandler);
+  Homie.setLoopFunction(loopHandler);
+
   Homie.setup();
 }
 
 void loop() {
   Homie.loop();
-  otaLoop();
 }
