@@ -6,9 +6,6 @@
 #include "welcome.hpp"
 #include "homie-node-collection.hpp"
 
-// I prefer to see the first ESP Boot messages as well, hence 74880 instead of 115200
-#define SERIAL_SPEED 74880
-
 const int PIN_BUTTON = 0;
 const int PIN_RELAY = 12;
 const int PIN_LED = 13;
