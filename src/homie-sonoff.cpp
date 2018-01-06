@@ -1,5 +1,5 @@
 #define FW_NAME "sonoff"
-#define FW_VERSION "1.0.3"
+#define FW_VERSION "1.0.4"
 
 #include <Homie.h>
 #include "ota.hpp"
