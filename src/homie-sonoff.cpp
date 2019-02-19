@@ -1,10 +1,13 @@
 #define FW_NAME "sonoff"
 #define FW_VERSION "1.0.4"
 
-#include <Homie.h>
+#include <Homie.hpp>
 #include "ota.hpp"
 #include "welcome.hpp"
-#include "homie-node-collection.hpp"
+#include "ButtonNode.hpp"
+#include "DHT22Node.cpp"
+#include "RelayNode.hpp"
+#include "SPI.h" // Compilation fails if SPI.h is not included even though BME280Node, which needs SPI.h is not part of the project
 
 // I prefer to see the first ESP Boot messages as well, hence 74880 instead of 115200
 #define SERIAL_SPEED 74880
@@ -26,18 +29,22 @@ ButtonNode buttonNode("button", PIN_BUTTON, []() {
   relayNode.toggleRelay();
 });
 
-void setupHandler() {
+void setupHandler()
+{
   // This is called after the MQTT_CONNECTED event
   ota.setup();
 }
 
-void loopHandler() {
+void loopHandler()
+{
   ota.loop();
 }
 
-void setup() {
+void setup()
+{
   Serial.begin(SERIAL_SPEED);
-  Serial << endl << endl;
+  Serial << endl
+         << endl;
 
   welcome.show();
   ota.setup();
@@ -55,6 +62,7 @@ void setup() {
   Homie.setup();
 }
 
-void loop() {
+void loop()
+{
   Homie.loop();
 }
