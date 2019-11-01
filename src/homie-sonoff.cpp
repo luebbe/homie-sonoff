@@ -1,16 +1,13 @@
 #define FW_NAME "sonoff"
-#define FW_VERSION "1.0.4"
+#define FW_VERSION "1.0.5"
 
 #include <Homie.hpp>
 #include "ota.hpp"
 #include "welcome.hpp"
 #include "ButtonNode.hpp"
-#include "DHT22Node.cpp"
+#include "DHT22Node.hpp"
 #include "RelayNode.hpp"
 #include "SPI.h" // Compilation fails if SPI.h is not included even though BME280Node, which needs SPI.h is not part of the project
-
-// I prefer to see the first ESP Boot messages as well, hence 74880 instead of 115200
-#define SERIAL_SPEED 74880
 
 const int PIN_BUTTON = 0;
 const int PIN_RELAY = 12;
