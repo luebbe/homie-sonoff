@@ -7,7 +7,8 @@
 #include "ButtonNode.hpp"
 #include "DHT22Node.hpp"
 #include "RelayNode.hpp"
-#include "SPI.h" // Compilation fails if SPI.h is not included even though BME280Node, which needs SPI.h is not part of the project
+#include "SPI.h"  // Compilation fails if SPI.h is not included even though BME280Node, which needs SPI.h is not part of the project
+#include "Wire.h" // Same
 
 const int PIN_BUTTON = 0;
 const int PIN_RELAY = 12;
