@@ -1,5 +1,5 @@
-#define FW_NAME "sonoff"
-#define FW_VERSION "1.0.5"
+#define FW_NAME "sonoff-dht22"
+#define FW_VERSION "1.0.6"
 
 #include <Homie.hpp>
 #include "ota.hpp"
